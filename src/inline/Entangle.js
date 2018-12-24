@@ -39,13 +39,13 @@ class Entangle {
         //returns an array of all vars wrapped with {{ }}
         //let indexArray = /(\{{.*?\}})/g.exec(this.copyDiv);
         let indexArray = this.copyDiv.match(/(\{{.*?\}})/g);
+        this.mainDiv.innerHTML = this.copyDiv;
         for(let x of indexArray) {
             let v = x.slice(2, x.length-2).trim();;
             let value = this.bObject.vars[v];
             try {
                 //replaces HTML with value. Does one at a time to match the index on for loop
-                this.mainDiv.innerHTML = this.copyDiv;
-                this.mainDiv.innerHTML = this.mainDiv.innerHTML.replace(/(\{{.*?\}})/, "<div id='bobjs-id-element-"+v+"'>"+ value+"</div>");
+                this.mainDiv.innerHTML=this.mainDiv.innerHTML.replace(/(\{{.*?\}})/, "<div id='bobjs-id-element-"+v+"'>"+ value+"</div>");
             } catch(e) {console.log("Parsing error. See updateDate()")}
             
             this.identifyEntangledInputs();
