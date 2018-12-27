@@ -14,7 +14,7 @@ class Entangle {
         this.mainDiv =  document.getElementById(bObject.element);
         this.copyDiv = this.mainDiv.innerHTML;
         this.reactiveInputs = [];
-        this.updateDOM();
+        this.prepDOM();
         this.prepReactivity();
     }
 
@@ -31,13 +31,12 @@ class Entangle {
         })
     }
 
-    updateDOM() {
+    prepDOM() {
         //Find all inline variables wrapped with {{ }}
         
         //preserve main string for when the dom updates again.
 
         //returns an array of all vars wrapped with {{ }}
-        //let indexArray = /(\{{.*?\}})/g.exec(this.copyDiv);
         let indexArray = this.copyDiv.match(/(\{{.*?\}})/g);
         this.mainDiv.innerHTML = this.copyDiv;
         for(let x of indexArray) {
@@ -60,7 +59,6 @@ class Entangle {
             self.reactiveInputs.forEach( inp => {
                 let entangleName = inp.getAttribute('bob-entangle');
                 if(entangleName === elementValue) {
-                    console.log(entangleName+" "+elementValue)
                     document.getElementById('bobjs-id-element-'+entangleName).innerHTML = inp.value;
                 }
             })
@@ -68,6 +66,7 @@ class Entangle {
 
         //nested loop: first loop is all inputs, second loop is all attributes
         //The loop finds elements with the attribute bob-entangle and adds listeners
+        //TODO replace with event delegation
         Array.prototype.forEach.call(inputs, x => {
             Array.prototype.forEach.call( x.attributes, y => {
  
