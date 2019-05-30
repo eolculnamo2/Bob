@@ -11,12 +11,14 @@ new bobIndex({
     },
     mounted() {
         console.log("Mounted");
-        //this.funcs.setTest('TEST')
-        this.vars.test = "x";
+        this.funcs.setTest.call(this,'TEST')
     },
     funcs: {
         setTest(x) {
-            //this.vars.test = "x";
+            this.vars.test = x;
+        },
+        changeTest() {
+            this.vars.test = 'CHANGE SUCCESSFUL';
         }
     }
 });

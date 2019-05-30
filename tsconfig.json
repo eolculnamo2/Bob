@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./assets/dist/",
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "lib": [
+      "ES2015",
+      "dom",
+    ]
+  }
+}
