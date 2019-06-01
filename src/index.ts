@@ -4,7 +4,6 @@ import Entangle from './inline/Entangle';
 class bobIndex {
   bObject: any;
 
-
   constructor(bObject: any) {
     this.bObject = bObject;
     // /this.updateValues = this.updateValues;
@@ -28,7 +27,7 @@ class bobIndex {
   //   for(let x in this.bObject.vars) {
   //     document.getElementById('bobjs-id-element-'+x).innerHTML = this.bObject.vars[x]
   //   }
-  // }
+  }
 }
 
 export default bobIndex;
