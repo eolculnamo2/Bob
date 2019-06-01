@@ -1,10 +1,11 @@
 import Entangle from './inline/Entangle';
-
+import ibObject from './constants/interfaces/ibObject';
 
 class bobIndex {
-  bObject: any;
+  //TODO update type according to object as it becomes available.
+  bObject: ibObject;
 
-  constructor(bObject: any) {
+  constructor(bObject: ibObject) {
     this.bObject = bObject;
     // /this.updateValues = this.updateValues;
 
@@ -13,8 +14,8 @@ class bobIndex {
   //     this.bObject.created();
   //   }
 
-  // TODO fix error
-     new Entangle(bObject); //two way data binding
+    // Starts two way data binding.
+    new Entangle(bObject.vars);
 
   //    //mounted hook
   //    if(this.bObject.mounted) {
@@ -22,11 +23,6 @@ class bobIndex {
   //     this.updateValues();
   //    }
   // }
-
-  // updateValues() {
-  //   for(let x in this.bObject.vars) {
-  //     document.getElementById('bobjs-id-element-'+x).innerHTML = this.bObject.vars[x]
-  //   }
   }
 }
 

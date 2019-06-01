@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/dom-inputevent": "^1.0.4",
     "express": "^4.16.4"
   },
   "devDependencies": {
