@@ -7,8 +7,8 @@
     "jsx": "react",
     "allowJs": true,
     "lib": [
-      "ES2015",
-      "dom",
+      "es2015",
+      "dom"
     ]
   }
 }

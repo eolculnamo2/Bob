@@ -1,4 +1,4 @@
-import Entangle from './inline/Entangle';
+import { Entangle, ParseInlineReferences} from './inline/index';
 import ibObject from './constants/interfaces/ibObject';
 
 class bobIndex {
@@ -7,15 +7,17 @@ class bobIndex {
 
   constructor(bObject: ibObject) {
     this.bObject = bObject;
-    // /this.updateValues = this.updateValues;
-
+    const { vars } = bObject;
   //   //created hook
   //   if(this.bObject.created) {
   //     this.bObject.created();
   //   }
 
+    // Replace inline references with DOM elements
+    new ParseInlineReferences(vars);
+
     // Starts two way data binding.
-    new Entangle(bObject.vars);
+    new Entangle(vars);
 
   //    //mounted hook
   //    if(this.bObject.mounted) {

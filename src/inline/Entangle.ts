@@ -1,12 +1,13 @@
 import iState from '../constants/interfaces/iState';
 import iProxiedObj from '../constants/interfaces/iProxiedObj';
+import { bobEntangle } from '../constants/variables/elementAttributes';
 
 class Entangle {
   proxyBindings: Set<iProxiedObj>
 
   constructor(state: iState) {
     this.proxyBindings = new Set<iProxiedObj>()
-    const entangledFields = document.querySelectorAll('[bob-entangle]');
+    const entangledFields = document.querySelectorAll(`[${bobEntangle}]`);
 
     // Each field has its setter manipulated and push to proxyBindings.
     entangledFields.forEach((field: HTMLInputElement) => {
@@ -15,7 +16,6 @@ class Entangle {
 
     // Add listener for each binding (To be refactored with event delegation)
     this.addListeners(this.proxyBindings);
-
   }
 
   // Returns manipulated setter for bob-entangle element and associated field.
@@ -39,8 +39,13 @@ class Entangle {
   addListeners(stateValues: Set<iProxiedObj>) {
 
     stateValues.forEach((proxyObj: iProxiedObj) => {
-      proxyObj.field.addEventListener('keyup', (e: InputEvent) => {
-        proxyObj.proxyBinding = e.target.value;
+      const { field, proxyBinding} = proxyObj;
+      const varName = field.getAttribute(bobEntangle);
+
+      field.addEventListener('keyup', (e: InputEvent) => {
+        const target = e.target as HTMLInputElement;
+        // @ts-ignore
+        proxyBinding[varName] = target.value;
       });
     });
 
