@@ -7,13 +7,26 @@ class bobIndex {
 
   constructor(bObject: ibObject) {
     this.bObject = bObject;
-    const { element, vars } = bObject;
+    const { created,
+            element,
+            mounted,
+            vars, } = bObject;
+
+    //created hook
+    if(created) {
+      created();
+    }
 
     // Replace inline references with DOM elements
     new ParseInlineReferences(vars, element);
 
     // Starts two way data binding.
     new Entangle(vars);
+
+     //mounted hook
+     if(mounted) {
+      mounted();
+     }
   }
 }
 
