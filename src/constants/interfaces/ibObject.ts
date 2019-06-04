@@ -1,4 +1,4 @@
 export default interface ibObject {
-  element: string,
+  element: HTMLElement,
   vars: { [keys: string]: any },
 }

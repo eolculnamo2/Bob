@@ -1,6 +1,6 @@
 import iState from '../constants/interfaces/iState';
 import iProxiedObj from '../constants/interfaces/iProxiedObj';
-import { bobEntangle } from '../constants/variables/elementAttributes';
+import { bobEntangle, bobInline } from '../constants/variables/elementAttributes';
 
 class Entangle {
   proxyBindings: Set<iProxiedObj>
@@ -22,9 +22,19 @@ class Entangle {
   setProxy(state: iState, field: HTMLInputElement): iProxiedObj {
     const bindingHandler: ProxyHandler<any> = {
       set(obj: {[key: string]: any}, id: string, update: any): any {
+
+        // Update input
         field.value=update;
-        // @todo add inline references to variables ->
-        // document.getElementById(`${id}-view`).innerText=update;
+
+        // Update inline variable references
+        const inlineVariables = document.querySelectorAll(`[${bobInline}]`);
+        Array.prototype.forEach.call(inlineVariables, ((x: HTMLElement) => {
+          if(x.getAttribute(bobInline) === field.getAttribute(bobEntangle)) {
+            x.innerText = update;
+          }
+        }));
+
+        // Update state
         obj[id] = update;
       }
     }

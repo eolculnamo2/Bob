@@ -1,7 +1,7 @@
 import bobIndex from '../src/index';
 
 new bobIndex({
-    element: "app",
+    element: document.getElementById('app'),
     vars: {
         test: "YeaAHHHH",
         myVariable: "Testing Variable"
