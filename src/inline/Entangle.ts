@@ -36,6 +36,9 @@ class Entangle {
 
         // Update state
         obj[id] = update;
+
+        // https://github.com/GoogleChrome/proxy-polyfill/issues/20
+        return true;
       }
     }
     return {
