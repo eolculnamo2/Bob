@@ -4,8 +4,8 @@ import { bobInline } from '../constants/variables/elementAttributes';
 // @todo replace with JSX
 
 class ParseInlineReferences {
-  referencedVariables: Array<string>;
-  spanFormatted: Array<string>;
+  private referencedVariables: Array<string>;
+  private spanFormatted: Array<string>;
 
   constructor(state: iState, element: HTMLElement) {
     // put all variables into an array
@@ -18,16 +18,16 @@ class ParseInlineReferences {
     this.insertSpans(element);
   }
 
-  parseVariableNames(element: HTMLElement): Array<string> {
+  private parseVariableNames(element: HTMLElement): Array<string> {
     const rawNames: Array<string> = element.innerHTML.match(/{{.*}}/g);
     return rawNames.map( x => x.slice(2,x.length-3).trim());
   }
 
-  createContainerSpan(state: iState): Array<string> {
+  private createContainerSpan(state: iState): Array<string> {
     return this.referencedVariables.map( x => `<span ${bobInline}="${x}">${state[x]}</span>`)
   }
 
-  insertSpans(element: HTMLElement) {
+  private insertSpans(element: HTMLElement) {
     const varsClone: Array<string> = [ ...this.spanFormatted ];
 
     while(element.innerHTML.match(/{{.*}}/g)) {

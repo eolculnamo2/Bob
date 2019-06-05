@@ -11,14 +11,21 @@ new bobIndex({
     },
     mounted() {
         console.log("Mounted");
-        //this.funcs.setTest.call(this,'TEST')
+        console.log(this);
+        //this.test();
+        this.funcs.test.call(this);
+        // this.funcs.setTest.call(this,'TEST')
     },
-    // funcs: {
-    //     setTest(x) {
-    //         this.vars.test = x;
-    //     },
-    //     changeTest() {
-    //         this.vars.test = 'CHANGE SUCCESSFUL';
-    //     }
-    // }
+    funcs: {
+        test() {
+            // This works because of BindToBobject.ts
+            console.log(this.vars)
+        },
+        setTest(x) {
+            this.vars.test = x;
+        },
+        changeTest() {
+            this.vars.test = 'CHANGE SUCCESSFUL';
+        }
+    }
 });

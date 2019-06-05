@@ -3,7 +3,7 @@ import iProxiedObj from '../constants/interfaces/iProxiedObj';
 import { bobEntangle, bobInline } from '../constants/variables/elementAttributes';
 
 class Entangle {
-  proxyBindings: Set<iProxiedObj>
+  private proxyBindings: Set<iProxiedObj>
 
   constructor(state: iState) {
     this.proxyBindings = new Set<iProxiedObj>()
@@ -19,7 +19,7 @@ class Entangle {
   }
 
   // Returns manipulated setter for bob-entangle element and associated field.
-  setProxy(state: iState, field: HTMLInputElement): iProxiedObj {
+  private setProxy(state: iState, field: HTMLInputElement): iProxiedObj {
     const bindingHandler: ProxyHandler<any> = {
       set(obj: {[key: string]: any}, id: string, update: any): any {
 
@@ -49,7 +49,7 @@ class Entangle {
 
   // to be refactored with event delegation..
   // Will also consider moving to a separate listeners class.
-  addListeners(stateValues: Set<iProxiedObj>) {
+  private addListeners(stateValues: Set<iProxiedObj>) {
 
     stateValues.forEach((proxyObj: iProxiedObj) => {
       const { field, proxyBinding} = proxyObj;
